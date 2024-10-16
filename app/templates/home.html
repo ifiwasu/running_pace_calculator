@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home - MyFlaskApp{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to MyFlaskApp!</h1>
+    <p class="lead">This is the homepage of our awesome Flask app.</p>
+    <hr class="my-4">
+    <p>Explore the features by logging in or registering an account.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('main.login') }}" role="button">Login</a>
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('main.register') }}" role="button">Register</a>
+</div>
+{% endblock %}
