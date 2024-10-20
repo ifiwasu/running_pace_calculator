@@ -1,14 +1,40 @@
 {% extends "base.html" %}
 
-{% block title %}Home - MyFlaskApp{% endblock %}
+{% block title %}
+    Calculate Running Distance
+{% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-    <h1 class="display-4">Welcome to MyFlaskApp!</h1>
-    <p class="lead">This is the homepage of our awesome Flask app.</p>
-    <hr class="my-4">
-    <p>Explore the features by logging in or registering an account.</p>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('main.login') }}" role="button">Login</a>
-    <a class="btn btn-secondary btn-lg" href="{{ url_for('main.register') }}" role="button">Register</a>
-</div>
+    <div class="container">
+        <h1>Running Distance Calculator</h1>
+        <p>Enter your pace (min/km) and total time (hh:mm:ss), and we'll calculate the distance you'll cover.</p>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.pace.label(class="form-label") }}
+                {{ form.pace(class="form-control", placeholder="e.g. 5:30") }}
+                {% if form.pace.errors %}
+                    <div class="text-danger">{{ form.pace.errors[0] }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.time.label(class="form-label") }}
+                {{ form.time(class="form-control", placeholder="e.g. 01:30:00") }}
+                {% if form.time.errors %}
+                    <div class="text-danger">{{ form.time.errors[0] }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Calculate Distance</button>
+        </form>
+
+        {% if distance is not none %}
+            <div class="mt-4">
+                <h3>Calculated Distance: {{ distance }} km</h3>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

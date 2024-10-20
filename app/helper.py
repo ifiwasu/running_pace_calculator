@@ -1,37 +1,17 @@
-def min_per_km_to_kmh(pace_string):
-    min_sec = pace_string.split(':')
-    minutes = int(min_sec[0])
-    seconds = int(min_sec[1])
-    total_min = minutes + (seconds / 60)
-    speed_in_kmh = 60 / total_min
-    rounded_kmh = round(speed_in_kmh, 2)
-    return rounded_kmh
+def convert_time_to_minutes(time_str):
+    hours, minutes, seconds = map(int, time_str.split(':'))
+    total_minutes = (hours * 60) + minutes + (seconds / 60)
+    return total_minutes
 
-def kmh_to_min_per_km(kmh):
-    total_min_per_km = 60 / kmh
-    minutes = int(total_min_per_km)
-    seconds = (total_min_per_km - minutes) * 60
-    rounded_seconds = round(seconds)
-    return f"{minutes}:{rounded_seconds:02d}"
+def convert_pace_to_minutes(pace_str):
+    minutes, seconds = map(int, pace_str.split(':'))
+    return minutes + (seconds / 60)
 
-def calculate_time(speed, distance):
-    time_in_hours = distance / speed
-    hours = int(time_in_hours)
-
-    remaining_minutes = (time_in_hours - hours) * 60
-    minutes = int(remaining_minutes)
-
-    seconds = (remaining_minutes - minutes) * 60
-    rounded_seconds = round(seconds) 
-    return f"{hours}:{minutes:02d}:{rounded_seconds:02d}"
-
-def calculate_speed(distance, hours, minutes, seconds):
-    total_time_in_hours = hours + (minutes / 60) + (seconds / 3600) 
-    speed = distance / total_time_in_hours
-    return round(speed, 2)
-
-def calculate_distance(speed, hours, minutes, seconds):
-    total_time_in_hours = hours + (minutes / 60) + (seconds / 3600) 
-    distance = speed * total_time_in_hours
+def calculate_distance(pace, time):
+    time_in_minutes = convert_time_to_minutes(time)
+    pace_in_minutes = convert_pace_to_minutes(pace)
+    
+    distance = time_in_minutes / pace_in_minutes
     return round(distance, 2)
 
+# print(calculate_distance('6:00', '1:00:00'))

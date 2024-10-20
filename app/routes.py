@@ -1,26 +1,19 @@
-from flask import Blueprint, render_template, redirect, url_for
-from app.forms import RegistrationForm, LoginForm
+from flask import Blueprint, render_template
+from app.forms import RunningForm
+from app.helper import calculate_distance
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
-
-@main.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
+    form = RunningForm()
+    distance = None
+    
     if form.validate_on_submit():
-        # logica voor route hier plaatsen en pass weghalen
-        pass
-    return render_template('register.html', form=form)
-
-@main.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        # Logic for handling login, like checking credentials
-        # After successful login, redirect to the home page
-        return redirect(url_for('main.home'))
-    return render_template('login.html', form=form)
+        pace = form.pace.data
+        time = form.time.data
+        
+        distance = calculate_distance(pace, time)
+    
+    return render_template('home.html', form=form, distance=distance)
 
