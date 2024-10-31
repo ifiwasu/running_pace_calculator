@@ -1,17 +1,13 @@
 {% extends "base.html" %}
-
 {% block title %}
     Calculate Running Distance
 {% endblock %}
-
 {% block content %}
     <div class="container">
-        <h1>Running Distance Calculator</h1>
-        <p>Enter your pace (min/km) and total time (hh:mm:ss), and we'll calculate the distance you'll cover.</p>
-
+        <h1>Running Calculator</h1>
+        <p>Enter two of the three fields (pace, time, distance) to calculate the third value.</p>
         <form method="POST">
             {{ form.hidden_tag() }}
-
             <div class="mb-3">
                 {{ form.pace.label(class="form-label") }}
                 {{ form.pace(class="form-control", placeholder="e.g. 5:30") }}
@@ -19,7 +15,6 @@
                     <div class="text-danger">{{ form.pace.errors[0] }}</div>
                 {% endif %}
             </div>
-
             <div class="mb-3">
                 {{ form.time.label(class="form-label") }}
                 {{ form.time(class="form-control", placeholder="e.g. 01:30:00") }}
@@ -27,14 +22,14 @@
                     <div class="text-danger">{{ form.time.errors[0] }}</div>
                 {% endif %}
             </div>
-
-            <button type="submit" class="btn btn-primary">Calculate Distance</button>
-        </form>
-
-        {% if distance is not none %}
-            <div class="mt-4">
-                <h3>Calculated Distance: {{ distance }} km</h3>
+            <div class="mb-3">
+                {{ form.distance.label(class="form-label") }}
+                {{ form.distance(class="form-control", placeholder="e.g. 21.1") }}
+                {% if form.distance.errors %}
+                    <div class="text-danger">{{ form.distance.errors[0] }}</div>
+                {% endif %}
             </div>
-        {% endif %}
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
     </div>
 {% endblock %}

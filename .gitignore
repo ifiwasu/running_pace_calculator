@@ -23,6 +23,9 @@ wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
+
+# VS Code
+.vscode/
 *.egg
 MANIFEST
 
