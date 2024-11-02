@@ -1,9 +1,23 @@
 def convert_time_to_minutes(time):
-    hours, minutes, seconds = map(int, time.split(':'))
+    parts = list(map(int, time.split(':')))
+    if len(parts) == 2:
+        minutes, seconds = parts
+        hours = 0
+    elif len(parts) == 3:
+        hours, minutes, seconds = parts
+    else:
+        raise ValueError("Invalid time format. Expected mm:ss or hh:mm:ss.")
     return hours * 60 + minutes + seconds / 60
 
 def convert_pace_to_minutes(pace):
-    minutes, seconds = map(int, pace.split(':'))
+    if ':' in pace:
+        minutes, seconds = map(int, pace.split(':'))
+    elif '.' in pace:
+        minutes, seconds = map(int, pace.split('.'))
+    elif ',' in pace:
+        minutes, seconds = map(int, pace.split(','))
+    else:
+        raise ValueError("Invalid pace format. Expected mm:ss, mm.ss, or mm,ss.")
     return minutes + seconds / 60
 
 def calculate_distance(pace, time):
