@@ -29,4 +29,3 @@ class RiegelForm(FlaskForm):
     base_distance = StringField('Base Distance (k)', validators=[DataRequired()])
     target_distance = StringField('Target Distance (k)', validators=[DataRequired()])
     submit = SubmitField('Predict time')
-    result = StringField('Predicted Time', render_kw={'readonly': True})    
