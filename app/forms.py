@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, HiddenField
+from wtforms.validators import DataRequired
 
 class RunningForm(FlaskForm):
     pace = StringField('Pace (min/km)')
@@ -21,3 +22,11 @@ class RunningForm(FlaskForm):
             return False
         
         return True
+    
+# make a form for the Riegel time predictor
+class RiegelForm(FlaskForm):
+    base_time = StringField('Base Time (hh:mm:ss)', validators=[DataRequired()])
+    base_distance = StringField('Base Distance (k)', validators=[DataRequired()])
+    target_distance = StringField('Target Distance (k)', validators=[DataRequired()])
+    submit = SubmitField('Predict time')
+    result = StringField('Predicted Time', render_kw={'readonly': True})    

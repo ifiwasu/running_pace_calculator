@@ -45,3 +45,16 @@ def calculate_pace(time, distance):
     seconds = int((pace_in_minutes * 60) % 60)
     
     return f"{minutes}:{seconds:02}"
+
+def riegel_time_predictor(base_time, base_distance, target_distance):
+    base_time_in_minutes = convert_time_to_minutes(base_time)
+    base_distance = float(base_distance)
+    target_distance = float(target_distance)   
+    result = base_time_in_minutes * (target_distance / base_distance) ** 1.06
+    
+    hours = int(result // 60)
+    minutes = int(result % 60)
+    seconds = int((result * 60) % 60)
+    
+    return f"{hours:02}:{minutes:02}:{seconds:02}"
+    
