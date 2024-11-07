@@ -71,18 +71,14 @@
                     </div>
                     <button type="submit" name="submit_riegel" class="btn btn-primary">Predict</button>
                 </form>
+
+                {% if riegel_result %}
+                    <div class="mt-4">
+                        <h5>Predicted Time</h5>
+                        <h2>{{ riegel_result }}</h2>
+                    </div>
+                {% endif %}
             </div>
         </div>
-
-        {% if riegel_result %}
-            <div class="card mb-4">
-                <div class="card-header">
-                    Predicted Time
-                </div>
-                <div class="card-body">
-                    <h2>{{ riegel_result }}</h2>
-                </div>
-            </div>
-        {% endif %}
     </div>
 {% endblock %}
